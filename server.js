@@ -39,12 +39,6 @@ function getPost(id) {
     });
 }
 
-function getPostDescription(descricao) {
-    return posts.findIndex((post) => {
-        return post.descricao === descricao;
-    });
-}
-
 // Retorna um post específico, formato JSON, pelo id
 // Aula 02
 app.get('/posts/:id', (req, res) => {
