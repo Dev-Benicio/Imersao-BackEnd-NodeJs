@@ -1,37 +1,23 @@
 import express from 'express';
-import { listaPosts } from '../controller/postController.js';
+import { listaPosts, getPostById, teste, api } from '../controller/postController.js';
 
 const router = (app) => {
   // Servidor Interpreta request JSON
-  app.use(express.json());
+    app.use(express.json());
 
   // Retorna todos os posts, formato JSON
   // Aula 03
-  app.get('/posts', listaPosts);
+    app.get('/posts', listaPosts);
 
-  // // Retorna um post específico, formato JSON, pelo id
-  // // Aula 02
-  // app.get('/posts/memory/:id', (req, res) => {
-  //   const index = getPost(req.params.id);
-  //   res.status(200).json(posts[index]);
-  // });
+  // Retorna um post específico, formato JSON, pelo id
+  // Aula 02
+    app.get('/posts/:id', getPostById);
 
-  // // Retorna todos os posts, formato JSON
-  // // Aula 02
-  // app.get('/posts/memory', (req, res) => {
-  //   res.status(200).json(posts);
-  // });
+  // Aula 01
+    app.get('/teste', teste);
 
-  // // Configurando o servidor para utilizar o protocolo HTTP
-  // // Aula 01
-  // app.get('/api', (req, res) => {
-  //   res.status(200).send('Benício está na Imersão Back-End');
-  // });
-
-  // // Testando request post
-  // app.post('/api', (req, res) => {
-  //   res.status(200).send('Recebido');
-  // });
+  // Testando request post
+    app.post('/api', api);
 };
 
 export default router;
