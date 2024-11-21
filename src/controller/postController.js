@@ -1,4 +1,5 @@
 import { getPosts, getPost, create} from "../models/post.js";
+import fs from 'fs';
 
 // Aula 04
 export async function createPost(req, res){
@@ -11,6 +12,24 @@ export async function createPost(req, res){
       res.status(500).json({"Erro":"Falha na requisição"})
   }
 }
+
+// Aula 04
+export async function uploadImg(req, res){
+  const new post = {
+      descricao: '',
+      imgUrl: req.file.originalname,
+      alt: ''
+  };
+  
+  try {
+    const postCriado = await criarPost(novoPost);
+    const imagemAtualizada = `uploads/${postCriado.insertedId}.png`
+        fs.renameSync(req.file.path, imagemAtualizada)
+    res.status(200).json(postCriado);  
+  } catch(erro) {
+    console.error(erro.message);
+    res.status(500).json({"Erro":"Falha na requisição"})
+    }
 }
 
 export async function listaPosts(req, res) {
