@@ -1,9 +1,16 @@
 import express from 'express';
-import { listaPosts, getPostById, teste, api } from '../controller/postController.js';
+// import do multer
+import { listaPosts, getPostById, createPost, teste, api } from '../controller/postController.js';
 
 const router = (app) => {
   // Servidor Interpreta request JSON
     app.use(express.json());
+
+  // Aula 04
+  app.post("/posts", createPost);
+  
+  // Aula 04
+  app.post("/upload", /* coloque o multer aqui, mas instale a dependencia */ );
 
   // Retorna todos os posts, formato JSON
   // Aula 03

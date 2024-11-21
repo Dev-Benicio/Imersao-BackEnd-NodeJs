@@ -1,4 +1,17 @@
-import { getPosts, getPost} from "../models/post.js";
+import { getPosts, getPost, create} from "../models/post.js";
+
+// Aula 04
+export async function createPost(req, res){
+  const post = req.body;
+  try {
+    const createPost = await create(post);
+    res.status(200).json(postCriado);  
+  } catch(erro) {
+      console.error(erro.message);
+      res.status(500).json({"Erro":"Falha na requisição"})
+  }
+}
+}
 
 export async function listaPosts(req, res) {
   const posts = await getPosts();

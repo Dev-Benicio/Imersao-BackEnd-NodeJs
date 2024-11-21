@@ -2,6 +2,13 @@ import getConnection from "../config/database.js";
 import { ObjectId } from "mongodb";
 const connect = await getConnection(process.env.LINK_CONNECT);
 
+// Aula 04
+export async function create(post){
+  const db = connect.db("database-imersao");
+  const collection = db.collection("posts");
+  collection.InsertOne(post);
+}
+
 // Faz connection com o banco de dados e retorna todos os posts
 // Aula 03 
 export async function getPosts() {
