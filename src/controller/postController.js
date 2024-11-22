@@ -1,6 +1,24 @@
-import { getPosts, getPost, create} from "../models/post.js";
+import { getPosts, getPost, create, update} from "../models/post.js";
 import fs from 'fs';
 
+// Aula 05
+export async function updatePost(req, res){
+  const id = req.params.id;
+  const UrlImg = 'http://localhost:3000/${id}.png';
+  const post = {
+    descricao: req.body.descricao,
+    ImgUrl: UrlImg,
+    alt: req.body.alt
+  };
+  try {
+    const updatePost = await update(id, post);
+    res.status(200).json(updatePost);  
+    console.log(req.body);
+  } catch(erro) {
+      console.error(erro.message);
+      res.status(500).json({"Erro":"Falha na requisição"})
+  }
+}
 // Aula 04
 export async function createPost(req, res){
   const post = req.body;
