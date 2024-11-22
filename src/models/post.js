@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import getConnection from "../config/database.js";
 import { ObjectId } from "mongodb";
 
@@ -8,7 +9,7 @@ export async function update(id, post) {
   const db = connect.db("database-imersao");
   const collection = db.collection("posts");
   const Obj = ObjectId.createFromHexString(id);
-  return collection.updateOne({ _id: new ObjectId(Obj) }, { $set: post }, { upsert: false });
+  return collection.updateOne({ _id: new ObjectId(Obj) }, { $set:post });
 }
 
 

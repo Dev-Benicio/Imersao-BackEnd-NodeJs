@@ -2,7 +2,12 @@ import express from 'express';
 // import do multer
 import multer from 'multer';
 import { listaPosts, getPostById, createPost, updatePost, uploadImg, teste, api } from '../controller/postController.js';
+import cors from 'cors';
 
+const corsOptions = {
+  origin: 'http://localhost:8000',
+  optionsSuccessStatus: 200,
+}
 // Configura o armazenamento do Multer para uploads de imagens
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -19,6 +24,7 @@ const upload = multer({ storage: storage });
 const router = (app) => {
   // Servidor Interpreta request JSON
     app.use(express.json());
+    app.use(cors(corsOptions));
 
     // Aula 05
     // Atualiza um post

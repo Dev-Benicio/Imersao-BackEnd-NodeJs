@@ -1,16 +1,20 @@
 import { getPosts, getPost, create, update} from "../models/post.js";
 import fs from 'fs';
+import gerarDescricaoComGemini from "../services/geminiService.js";
 
 // Aula 05
 export async function updatePost(req, res){
   const id = req.params.id;
-  const UrlImg = 'http://localhost:3000/${id}.png';
-  const post = {
-    descricao: req.body.descricao,
-    ImgUrl: UrlImg,
-    alt: req.body.alt
-  };
+  const UrlImg = `http://localhost:3000/${id}.png`;
   try {
+    const ImgBuffer = fs.readFileSync(`uploads/${id}.png`);
+    const descricao = await gerarDescricaoComGemini(ImgBuffer);
+    const post = {
+      descricao: descricao,
+      ImgUrl: UrlImg,
+      alt: req.body.alt
+    };
+    
     const updatePost = await update(id, post);
     res.status(200).json(updatePost);  
     console.log(req.body);
