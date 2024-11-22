@@ -6,7 +6,7 @@ export async function createPost(req, res){
   const post = req.body;
   try {
     const createPost = await create(post);
-    res.status(200).json(postCriado);  
+    res.status(200).json(createPost);  
   } catch(erro) {
       console.error(erro.message);
       res.status(500).json({"Erro":"Falha na requisição"})
@@ -15,16 +15,16 @@ export async function createPost(req, res){
 
 // Aula 04
 export async function uploadImg(req, res){
-  const new post = {
+  const newpost = {
       descricao: '',
-      imgUrl: req.file.originalname,
+      ImgUrl: req.file.originalname,
       alt: ''
   };
   
   try {
-    const postCriado = await criarPost(novoPost);
-    const imagemAtualizada = `uploads/${postCriado.insertedId}.png`
-        fs.renameSync(req.file.path, imagemAtualizada)
+    const postCriado = await create(newpost);
+    const imagemAtualizada = `uploads/${postCriado.insertedId}.png`;
+    fs.renameSync(req.file.path, imagemAtualizada);
     res.status(200).json(postCriado);  
   } catch(erro) {
     console.error(erro.message);

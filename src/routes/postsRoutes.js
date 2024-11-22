@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer(storage : storage);
+const upload = multer({ storage: storage });
 const router = (app) => {
   // Servidor Interpreta request JSON
     app.use(express.json());
